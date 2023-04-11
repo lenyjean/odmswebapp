@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container-lg shadow-lg p-5">
+  <a href="{% url 'document' %}" class="text-decoration-none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+    </svg>
+    Back to documents
+  </a>
+  <div class="row justify-content-center mt-5 mb-5">
+    <div class="col-sm col-md-6 col-lg-6">
+      <div class="card shadow rounded p-3">
+        {% for detail in document %}
+        <div class="card-title">
+          <p class="fs-5 fw-semibold">You are viewing the details of: </p>     
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item fw-normalbold">File Name: {{detail.file_name}}</li>
+            <li class="list-group-item fw-normalbold">Category: {{detail.category}}</li>
+            <li class="list-group-item fw-normalbold">Created On: {{detail.uploaded_at}}</li>
+            <li class="list-group-item fw-normalbold">Uploaded By: {{detail.uploaded_by}}</li>
+          </ul>
+        </div>
+       
+        <div class="d-inline-block ms-auto mt-3">
+          <a href="{% url 'update-document' detail.id %}" type="submit" class="btn btn-primary btn-md rounded-pill px-3 py-2.5 me-2 mb-2">
+            Update
+          </a>
+          <a href="{% url 'document' %}" type="button" class="btn btn-secondary btn-md rounded-pill px-3 py-2.5 me-2 mb-2">
+            Cancel
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+      
+    </div>   
+  </div>
+</div>
+
+{% endblock %}

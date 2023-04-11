@@ -1,0 +1,57 @@
+{% load static %}
+
+<style>
+  .nav-link.active,
+  .nav-link:hover {
+    color: #fff;
+    background-color: rgb(212, 210, 210);
+  }
+</style>
+
+
+<header class="p-3 mb-3 border-bottom" style="background-color: #1e1f22;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-2">
+        <img src="{% static 'logo/logopng.png' %}" class="rounded float-start" width="60" height="60">
+      </div>
+      <div class="col-lg-10">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end">
+          
+          <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
+            <li>
+              <a href="{% url 'home' %}" class="nav-link px-2 text-primary" style="{{ home_state }}">
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'category' %}" class="nav-link px-2 text-white" style="{{ category_state }}">
+                Category
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'document' %}" class="nav-link px-2 text-white" style="{{ document_state }}">Documents</a>
+            </li>
+            <li>
+              <a href="{% url 'activity-history' %}" class="nav-link px-2 text-white" style="{{ history_state }}">Activity History</a>
+            </li>
+            <li>
+              <a href="{% url 'accounts-list' %}" class="nav-link px-2 text-white" style="{{ account_state }}">User Accounts</a>
+            </li>
+          </ul>&nbsp;&nbsp;
+          <div class="dropdown text-end">
+            <a href="#" class="d-block link-dark text-decoration-none text-white fs-5 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="{{ user.profile_picture.url }}" alt="profile picture" width="40" height="40" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu text-small" style="background-color: rgb(253, 251, 251); color:#e6e6e6">
+              <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="bi bi-person-fill"></i>&nbsp;Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-right"></i>&nbsp;Sign out</a></li>
+            </ul>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

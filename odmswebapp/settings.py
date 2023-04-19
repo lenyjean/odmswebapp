@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-4o$4ks4)^d7o$p_)zki%hlb*b-*$xz26c^qdz_oh04dg965qe0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -57,6 +57,19 @@ ROOT_URLCONF = 'odmswebapp.urls'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
+
+CSRF_TRUSTED_ORIGINS = [ 'https://odms.up.railway.app',  'https://*.up.railway.app', 'http://localhost:8000']
+
+
+# CSRF_COOKIE_DOMAIN = 'up.railway.app'
+
+CORS_ORIGIN_WHITELIST = (
+    'https://odms.up.railway.app',
+    'http://localhost:8000'
+)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -79,13 +92,23 @@ WSGI_APPLICATION = 'odmswebapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': "railway",
+        'USER': "postgres",
+        'PASSWORD': "7lLoVzrdCz8Zmw0Z6kGy",
+        'HOST': "containers-us-west-111.railway.app",
+        'PORT':  "7972"
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -123,6 +146,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -137,3 +161,7 @@ AUTH_USER_MODEL = "apps.User"
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = ""
 LOGOUT_REDIRECT_URL = 'login'
+
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024

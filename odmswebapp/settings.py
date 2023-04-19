@@ -57,8 +57,6 @@ ROOT_URLCONF = 'odmswebapp.urls'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
-CRISPY_TEMPLATE_PACK = "tailwind"
 
 CSRF_TRUSTED_ORIGINS = [ 'https://odms.up.railway.app',  'https://*.up.railway.app', 'http://localhost:8000']
 

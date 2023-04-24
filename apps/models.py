@@ -55,6 +55,7 @@ class User(AbstractUser):
     is_employee = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     objects = CustomUserManager()
+    department = models.OneToOneField("Department", on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name = 'User'
@@ -80,6 +81,7 @@ class Department(models.Model):
     department = models.CharField(max_length=255, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+
     class Meta:
         verbose_name = 'Department'
         verbose_name_plural = 'Departments'
@@ -92,10 +94,11 @@ class Documents(models.Model):
     tracking_no = models.CharField(max_length=255, default=f"DOC-{gen_uuid}", editable=False)
     file_name = models.CharField(max_length=255)
     document = models.FileField(upload_to="documents")
-    receiver = models.CharField(max_length=255)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     uploaded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="file_uploader")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="file_category")
+    is_received = models.BooleanField(default=False)
+    receiver = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, related_name="file_receiver")
 
     class Meta:
         verbose_name = 'Document'

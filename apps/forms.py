@@ -6,10 +6,16 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = '__all__'
 
+
+class DepartmentForm(forms.ModelForm):
+    class Meta:
+        model = Department
+        fields = '__all__'
+
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Documents
-        fields = ['file_name', 'category', 'document']
+        fields = ['file_name', 'category', 'document', 'receiver']
 
 user_type = (
     ('admin', 'admin'),

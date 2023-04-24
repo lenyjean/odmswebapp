@@ -24,10 +24,14 @@
                 Home
               </a>
             </li>
-            <li>
-              <a href="{% url 'category' %}" class="nav-link px-2 text-white" style="{{ category_state }}">
-                Category
+            <li class="dropdown">
+              <a href="#" class="nav-link px-2 text-white" data-bs-toggle="dropdown" >
+                Category / Department
               </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'category' %}">View Category</a></li>
+                <li><a class="dropdown-item" href="{% url 'department' %}">View Departments</a></li>
+              </ul>
             </li>
             <li>
               <a href="{% url 'document' %}" class="nav-link px-2 text-white" style="{{ document_state }}">Documents</a>

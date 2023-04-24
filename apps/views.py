@@ -7,6 +7,8 @@ from django.urls import reverse
 from .models import *
 from .forms import *
 from .utils import *
+
+
 # Create your views here.
 @login_required(login_url='/login')
 def homepage(request):
@@ -85,6 +87,7 @@ def view_account(request,pk):
     }
     return render(request, template_name, context)
 
+
 @login_required(login_url='/login')
 def update_account(request, pk):
     template_name = 'accounts/update_account.html'
@@ -119,6 +122,54 @@ def category(request):
     return render(request, template_name, context)
 
 @login_required(login_url='/login')
+def department(request):
+    template_name = 'department/department_list.html'
+    department = Department.objects.all().order_by('-created_at')
+    paginator = Paginator(department, 10)
+    page_number = request.GET.get('page')
+    department = paginator.get_page(page_number)
+    context = {
+        "department": department,
+        "department_state": "background-color: rgba(212, 210, 210, 1);  color: #fff;",
+        # "breadcrumb": breadcrumb
+    }
+    return render(request, template_name, context)
+
+@login_required(login_url='/login')
+def add_department(request):
+    template_name = 'department/add_department.html'
+    form = DepartmentForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('department')
+    context = {
+        "form": form,
+    }
+    return render(request, template_name, context)
+
+@login_required(login_url='/login')
+
+
+@login_required(login_url='/login')
+def update_department(request, pk):
+    template_name = 'department/update_department.html'
+    department = get_object_or_404(Department, id=pk)
+    form = DepartmentForm(request.POST or None, instance=department)
+    if form.is_valid():
+        form.save()
+        return redirect('department')
+    context = {
+        "form": form,
+    }
+    return render(request, template_name, context)
+
+@login_required(login_url='/login')
+def delete_department(request, pk):
+    department = Department.objects.filter(id=pk)
+    department.delete()
+    return redirect('department')
+
+
 def add_category(request):
     template_name = 'category/add_category.html'
     form = CategoryForm(request.POST or None)

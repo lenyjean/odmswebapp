@@ -3,6 +3,8 @@ from django.db import models
 
 import uuid
 
+def_uuid = uuid.uuid4()
+gen_uuid = str(def_uuid)[:6]
 # Create your models here.
 class CustomUserManager(BaseUserManager):
     """
@@ -72,11 +74,25 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category
+    
+class Department(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    department = models.CharField(max_length=255, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Department'
+        verbose_name_plural = 'Departments'
+
+    def __str__(self):
+        return self.department
 
 class Documents(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    tracking_no = models.CharField(max_length=255, default=f"DOC-{gen_uuid}", editable=False)
     file_name = models.CharField(max_length=255)
     document = models.FileField(upload_to="documents")
+    receiver = models.CharField(max_length=255)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     uploaded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="file_uploader")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="file_category")

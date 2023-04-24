@@ -31,8 +31,10 @@
             <table class="table" id="docuTable">
                 <thead>
                     <tr>
+                        <th scope="col" class="text-center">Tracking #</th>
                         <th scope="col" class="text-center">File Name</th>
                         <th scope="col" class="text-center">Category</th>
+                        <th scope="col" class="text-center">Receiver</th>
                         <th scope="col" class="text-center">Created On</th>
                         <th scope="col" class="text-center">Uploaded by</th>
                         <th scope="col" class="text-center">Actions</th>
@@ -40,8 +42,10 @@
                 </thead>
                 {% for list in document %}
                 <tr>
+                    <td class="text-center">{{ list.tracking_no }}</td>
                     <td class="text-center">{{ list.file_name }}</td>
                     <td class="text-center">{{ list.category }}</td>
+                    <td class="text-center">{{ list.receiver }}</td>
                     <td class="text-center">{{ list.uploaded_at }}</td>
                     <td class="text-center">{{ list.uploaded_by }}</td>
                     <td class="text-center">

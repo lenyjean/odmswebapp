@@ -168,7 +168,7 @@ def update_account(request, pk):
     form = UserUpdateForm(request.POST or None, request.FILES or None, instance=account)
     if form.is_valid():
         form.save()
-        return redirect('accounts-list')
+        return redirect('account')
     context = {
         "form": form,
         "pk": pk

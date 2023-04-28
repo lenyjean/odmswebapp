@@ -1,0 +1,69 @@
+{% load static %}
+
+<style>
+  .nav-link.active,
+  .nav-link:hover {
+    color: #fff;
+    background-color: rgb(212, 210, 210);
+  }
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+  <div class="container">
+    <img src="{% static 'logo/logopng.png' %}" class="rounded float-start" width="60" height="60">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar2" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbar2Label">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbar2Label">ODMS</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body ">
+        <ul class="navbar-nav mt-2 justify-content-sm-end  flex-grow-1 pe-3 col-lg-auto">
+          <li class="nav-item ">
+            <a class="nav-link px-2 text-primary" aria-current="page" href="{% url 'home' %}" style="{{ home_state }}">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle px-2 text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             Category / Departments
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'category' %}"><i class="bi bi-intersect"></i>&nbsp;View Category</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="{% url 'department' %}"><i class="bi bi-briefcase-fill"></i>&nbsp;View Departments</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 text-white" href="{% url 'document' %}" style="{{ document_state }}">Document</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 text-white" href="{% url 'activity_history' %}" style="{{ history_state }}" >Activity History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-2 text-white" href="{% url 'account' %}" style="{{ account_state }}">User Accounts</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="{{ user.profile_picture.url }}" alt="profile picture" width="30" height="30" class="rounded-circle">
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'profile' %}">
+                <i class="bi bi-person-fill"></i>&nbsp;Profile</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/logout">
+                <i class="bi bi-box-arrow-right"></i>&nbsp;Sign out</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

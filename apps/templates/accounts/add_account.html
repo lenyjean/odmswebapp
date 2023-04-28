@@ -13,7 +13,7 @@
           <button type="submit" class="btn btn-primary btn-md mr-2 mb-2" id="liveAlertBtn">
             Submit
           </button>
-          <a href="{% url 'accounts-list' %}" type="button" class="btn btn-secondary btn-md mr-2 mb-2">
+          <a href="{% url 'account' %}" type="button" class="btn btn-secondary btn-md mr-2 mb-2">
             Cancel
           </a>
         </div>
@@ -28,7 +28,7 @@
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Success</h4>
-          <a href="/accounts-list" class="close" data-dismiss="modal">&times;</a>
+          <a href="/account" class="close" data-dismiss="modal">&times;</a>
         </div>
         <!-- Modal body -->
         <div class="modal-body">
@@ -36,7 +36,7 @@
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-          <a href="/accounts-list" class="btn btn-success" id="closeBtn" data-dismiss="modal">Close</a>
+          <a href="/account" class="btn btn-success" id="closeBtn" data-dismiss="modal">Close</a>
         </div>
       </div>
     </div>
@@ -49,7 +49,7 @@
         e.preventDefault();
         $.ajax({
           type: 'POST',
-          url: '{% url "create-new-account" %}',
+          url: '{% url "add_account" %}',
           data: $('#myForm').serialize(),
           success: function () {
             $('#myModal').modal('show');

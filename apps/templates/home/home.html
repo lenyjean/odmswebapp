@@ -12,21 +12,35 @@
             opacity: 1;
         }
     }
+
+    .overlay-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        animation: slideIn 2s;
+    }
+
+    .overlay-text p {
+        font-size: 1.5rem;
+    }
 </style>
 
 <div class="container mt-2">
-    <div class="p-5 text-center rounded-3 mx-auto" style="position: relative;">
+    <div class="p-5 text-center rounded-3 mx-auto position-relative">
         <img src="{% static 'logo/tanauan.jpg' %}" class="d-block mx-auto img-fluid rounded-3"
             alt="Municipality of Tanauan" loading="lazy" style="opacity: 0.6;">
-        <h1 class="text-body-emphasis mt-2"
-            style="position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%); z-index: 1; animation: slideIn 2s;">
-            City Government of Tanauan</h1>
-        <p class="col-lg-8 mx-auto fs-5 mb-5 "
-            style="position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%); z-index: 1; animation: slideIn 2s;">
-            Nagkakaisang mga Lingkod Bayan para sa isang Bago at Maunlad na Lungsod ng Tanauan!
-        </p>
+        <div class="overlay-text">
+            <h1 class="text-body-emphasis mt-2 fs-2 fw-bold">City Government of Tanauan</h1>
+
+            <p class="col-lg-8 mx-auto fs-5 mt-2 mb-5 ">
+                Nagkakaisang mga Lingkod Bayan para sa isang Bago at Maunlad na Lungsod ng Tanauan!
+            </p>
+        </div>
     </div>
 </div>
+
 <footer class="bg-light py-4">
     <div class="container">
         <div class="row">

@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="mb-5">
-                <a href="{% url 'create-new-account' %}" class="btn btn-primary">
+                <a href="{% url 'add_account' %}" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" style="width:23px; height:23px;">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
@@ -59,7 +59,7 @@
                         {% endif %}
                     </td>
                     <td class="text-center">
-                        <a href="{% url 'view-account' list.id %}" class="btn btn-success btn-sm"
+                        <a href="{% url 'view_account' list.id %}" class="btn btn-success btn-sm"
                             style="height: 32px; width:32px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-eye" viewBox="0 0 16 16">
@@ -175,7 +175,7 @@
 
 <script>
     function setID(id) {
-        document.getElementById("removeAcc").href = '/delete-account/' + id;
+        document.getElementById("removeAcc").href = '/delete_account/' + id;
     }
 </script>
 

@@ -34,7 +34,7 @@
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Success</h4>
-          <a href="/accounts-list" class="close" data-dismiss="modal">&times;</a>
+          <a href="/account" class="close" data-dismiss="modal">&times;</a>
         </div>
         <!-- Modal body -->
         <div class="modal-body">
@@ -42,27 +42,13 @@
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-          <a href="/accounts-list" class="btn btn-success" id="closeBtn" data-dismiss="modal">Close</a>
+          <a href="/account" class="btn btn-success" id="closeBtn" data-dismiss="modal">Close</a>
         </div>
       </div>
     </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <!-- <script>
-    $(document).ready(function () {
-      $('#myForm').submit(function (e) {
-        e.preventDefault();
-        $.ajax({
-          type: 'POST',
-          url: '{% url "update-account" pk %}',
-          data: $('#myForm').serialize(),
-          success: function () {
-            $('#myModal').modal('show');
-          }
-        });
-      });
-});
-  </script> -->
+
 
   {% endblock %}

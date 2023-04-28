@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="container-lg shadow-lg p-5">
-    <a href="{% url 'accounts-list' %}" class="text-decoration-none">
+    <a href="{% url 'account' %}" class="text-decoration-none">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
             viewBox="0 0 16 16">
             <path fill-rule="evenodd"
@@ -49,16 +49,7 @@
                         </li>
                     </ul>
                 </div>
-                <!-- <div class="d-inline-block ms-auto mt-3">
-                    <a href="{% url 'update-account' list.id %}" type="submit"
-                        class="btn btn-primary btn-sm rounded-pill px-3 py-2.5 me-2 mb-2">
-                        Update
-                    </a>
-                    <a href="{% url 'accounts-list' %}" type="button"
-                        class="btn btn-secondary btn-sm rounded-pill px-3 py-2.5 me-2 mb-2">
-                        Cancel
-                    </a>
-                </div> -->
+     
                 {% endfor %}
             </div>
         </div>
@@ -82,7 +73,7 @@
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                            <a href="{% url 'update-account' pk %}" class="text-decoration-none">
+                            <a href="{% url 'update_account' pk %}" class="text-decoration-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-person-fill" viewBox="0 0 16 16">
                                     <path
@@ -92,7 +83,7 @@
                             </a>
                         </div>
                         <div class="accordion-body">
-                            <a href="{% url 'update-password' %}" class="text-decoration-none">
+                            <a href="{% url 'update_password' %}" class="text-decoration-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-lock-fill" viewBox="0 0 16 16">
                                     <path

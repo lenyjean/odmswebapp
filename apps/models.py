@@ -5,7 +5,10 @@ import uuid
 
 def_uuid = uuid.uuid4()
 gen_uuid = str(def_uuid)[:6]
+
 # Create your models here.
+# This is a custom user model manager in Python where email is used as the unique identifier for
+# authentication instead of usernames, with methods to create a user and a superuser.
 class CustomUserManager(BaseUserManager):
     """
     Custom user model manager where email is the unique identifiers
@@ -40,6 +43,9 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(employee_no, password, **extra_fields)
 
 
+# This is a custom user model in Django with additional fields such as employee number, profile
+# picture, middle name, address, birthday, contact, sex, department, and boolean fields for employee
+# and admin status.
 class User(AbstractUser):
 
     USERNAME_FIELD = 'employee_no'# changes email to unique and blank to false
@@ -64,6 +70,8 @@ class User(AbstractUser):
     def __str__(self):
         return self.first_name + " " + self.last_name
     
+# This is a Django model class for a Category object with fields for id, category name, and creation
+# timestamp.
 class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     category = models.CharField(max_length=255, unique=True)
@@ -76,6 +84,8 @@ class Category(models.Model):
     def __str__(self):
         return self.category
     
+# This is a Django model class for a Department object with fields for id, department name, and
+# creation timestamp.
 class Department(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     department = models.CharField(max_length=255, unique=True)
@@ -89,6 +99,8 @@ class Department(models.Model):
     def __str__(self):
         return self.department
 
+# This is a Django model class for storing documents with fields for tracking number, file name,
+# document file, upload and receiver information.
 class Documents(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     tracking_no = models.CharField(max_length=255, default=f"DOC-{gen_uuid}", editable=False)
@@ -107,6 +119,8 @@ class Documents(models.Model):
     def __str__(self):
         return self.file_name 
 
+# This is a Django model class for storing activity history with fields for user, history, user image,
+# and read status.
 class ActivityHistory(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)

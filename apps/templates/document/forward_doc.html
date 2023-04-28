@@ -2,24 +2,21 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-
 <div class="container p-5 shadow-lg mt-5">
     <div class="card">
-        <div class="card-body">
-          <p class="fs-5 fw-semibold">You are adding a new department in the system</p>                 
+        <div class="card-body">    
         <form method="POST" enctype='multipart/form-data'>
             {% csrf_token %}
             {{ form|crispy }}
             <div class="d-inline-block ml-auto mt-2 float-end">
-                <button type="submit" class="btn btn-primary btn-md mr-2 mb-2">
+                <button type="submit" class="btn btn-primary btn-sm mr-2 mb-2">
                   Submit
                 </button>
-                <a href="{% url 'department' %}" type="button" class="btn btn-secondary btn-md mr-2 mb-2">
+                <a href="{% url 'document' %}" type="button" class="btn btn-secondary btn-sm mr-2 mb-2">
                   Cancel
                 </a>
             </div>          
-        </form>
-              
+        </form>        
     </div>
 </div>
 

@@ -28,7 +28,7 @@
             </form>
           </div>
         </div>
-        <a href="{% url 'add-new-category' %}" class="btn btn-primary">
+        <a href="{% url 'add_new_category' %}" class="btn btn-primary">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
             stroke="currentColor" style="width:23px; height:23px;">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
@@ -51,7 +51,7 @@
               <td class="text-center">{{ list.category }}</td>
               <td class="text-center">{{ list.created_at }}</td>
               <td class="text-center">
-                <a href="{% url 'update-category' list.id %}" class="btn btn-warning btn-sm"
+                <a href="{% url 'update_category' list.id %}" class="btn btn-warning btn-sm"
                   style="height: 32px; width:32px;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -165,7 +165,7 @@
 
   <script>
     function setID(id) {
-      document.getElementById("removeCat").href = '/delete-category/' + id;
+      document.getElementById("removeCat").href = '/delete_category/' + id;
     }
   </script>
   <!-- search form javascript -->

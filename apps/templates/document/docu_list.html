@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="mb-5">
-                <a href="{% url 'add-new-document' %}" class="btn btn-primary">
+                <a href="{% url 'add_new_document' %}" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" style="width:23px; height:23px;">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
@@ -49,7 +49,26 @@
                     <td class="text-center">{{ list.uploaded_at }}</td>
                     <td class="text-center">{{ list.uploaded_by }}</td>
                     <td class="text-center">
-                        <a href="{% url 'view-document' list.id %}" class="btn btn-success btn-sm"
+                        <a href="{% url 'forward_document' list.id %}" class="btn btn-purple btn-sm"
+                            style="height: 32px; width:32px;color:rgb(234, 234, 234); background-color: #ab4dd2 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                            </svg>                              
+                        </a>&nbsp;
+
+                        <!-- Button for send modal -->
+                        <!-- <button type="button" class="btn btn-danger btn-sm" style="height: 32px; width:32px;"
+                            data-bs-toggle="modal" data-bs-target="#myModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z">
+                                </path>
+                            </svg>
+                        </button> -->
+                        <!-- Modal -->
+
+                        <a href="{% url 'view_document' list.id %}" class="btn btn-success btn-sm"
                             style="height: 32px; width:32px;">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-eye" viewBox="0 0 16 16">
@@ -172,9 +191,29 @@
     </div>
 </div>
 
+<!-- Forward/send modal -->
+<!-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Select recipient: {{ form }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a href="" id="removeDoc" type="button" class="btn btn-danger">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- End Modal -->
+
 <script>
     function setID(id) {
-        document.getElementById("removeDoc").href = '/delete-document/' + id;
+        document.getElementById("removeDoc").href = '/delete_document/' + id;
     }
 </script>
 <!-- search form javascript -->

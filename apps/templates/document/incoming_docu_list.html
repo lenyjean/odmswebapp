@@ -19,74 +19,59 @@
                 </div>
             </div>
             <div class="mb-5">
-                <a href="{% url 'add_account' %}" class="btn btn-primary">
+                <a href="{% url 'add_new_document' %}" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" style="width:23px; height:23px;">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                     </svg>
 
-                    Add new user account
+                    Add new document
                 </a>
             </div>
-            <table class="table" id="accountTable">
+            <table class="table" id="docuTable">
                 <thead>
                     <tr>
-                        <th scope="col" class="text-center">Full Name</th>
-                        <th scope="col" class="text-center">Employee No.</th>
-                        <th scope="col" class="text-center">Address</th>
-                        <th scope="col" class="text-center">Birthday</th>
-                        <th scope="col" class="text-center">Sex</th>
-                        <th scope="col" class="text-center">Contact Number</th>
-                        <th scope="col" class="text-center">User Type</th>
+                        <th scope="col" class="text-center">Tracking #</th>
+                        <th scope="col" class="text-center">File Name</th>
+                        <th scope="col" class="text-center">Category</th>
+                        <th scope="col" class="text-center">Receiver</th>
+                        <th scope="col" class="text-center">Created On</th>
+                        <th scope="col" class="text-center">Uploaded by</th>
                         <th scope="col" class="text-center">Actions</th>
                     </tr>
                 </thead>
-                {% for list in account %}
+                {% for list in document %}
                 <tr>
-                    <td class="text-center">{{ list.first_name }} {{ list.middle_name }} {{ list.last_name }}</td>
-                    <td class="text-center">{{ list.employee_no }}</td>
-                    <td class="text-center">{{ list.address }}</td>
-                    <td class="text-center">{{ list.birthday }}</td>
-                    <td class="text-center">{{ list.sex }}</td>
-                    <td class="text-center">{{ list.contact}}</td>
+                    <td class="text-center">{{ list.tracking_no }}</td>
+                    <td class="text-center">{{ list.file_name }}</td>
+                    <td class="text-center">{{ list.category }}</td>
+                    <td class="text-center">{{ list.receiver }}</td>
+                    <td class="text-center">{{ list.uploaded_at }}</td>
+                    <td class="text-center">{{ list.uploaded_by }}</td>
                     <td class="text-center">
-                        {% if list.is_admin %}
-                        <span class="badge bg-primary">Admin</span>
-                        {% elif list.is_employee %}
-                        <span class="badge bg-primary">Employee</span>
+                        {% if list.is_received %}
+                            <a href="{{ list.document.url }}" type="button" class="btn btn-primary btn-sm"
+                                style="height: 32px; width:32px;" download>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-box-arrow-in-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z" />
+                                    <path fill-rule="evenodd"
+                                        d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                </svg>
+                            </a>&nbsp;
                         {% else %}
-                        <span class="badge bg-danger">Not Available</span>
+                            <a href="{% url 'receive_docu' list.id %}" class="btn btn-success btn-sm"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                                Receive file                     
+                            </a>&nbsp;
                         {% endif %}
-                    </td>
-                    <td class="text-center">
-                        <a href="{% url 'view_account' list.id %}" class="btn btn-success btn-sm"
-                            style="height: 32px; width:32px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-eye" viewBox="0 0 16 16">
-                                <path
-                                    d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z">
-                                </path>
-                                <path
-                                    d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z">
-                                </path>
-                            </svg>
-                        </a>&nbsp;
-                        <button type="button" class="btn btn-danger btn-sm" style="height: 32px; width:32px;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-trash3-fill" viewBox="0 0 16 16" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" onclick="setID('{{ list.id }}')">
-                                <path
-                                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z">
-                                </path>
-                            </svg>
-                        </button>
                     </td>
                     {% empty %}
                 <tr>
-                    <td>
-                        <p>No accounts available</p>
-                    </td>
+                    <td colspan="5" class="text-center">No document available</td>
                 </tr>
+
                 </tr>
                 {% endfor %}
             </table>
@@ -96,8 +81,8 @@
         </div>
         <div class="d-flex flex-column-reverse flex-sm-row justify-content-sm-end align-items-center m-3">
             <div class="d-inline-flex">
-                {% if account.has_previous %}
-                <a href="?page={{ account.previous_page_number }}" class="btn btn-outline-secondary rounded-start">
+                {% if document.has_previous %}
+                <a href="?page={{ document.previous_page_number }}" class="btn btn-outline-secondary rounded-start">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-arrow-left-short" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
@@ -116,20 +101,20 @@
                 </button>
                 {% endif %}
 
-                {% for num in account.paginator.page_range %}
-                {% if account.number == num %}
+                {% for num in document.paginator.page_range %}
+                {% if document.number == num %}
                 <button type="button" class="btn btn-primary">
                     {{ num }}
                 </button>
-                {% elif num > account.number|add:-3 and num < account.number|add:3 %} <a href="?page={{ num }}"
+                {% elif num > document.number|add:-3 and num < document.number|add:3 %} <a href="?page={{ num }}"
                     class="btn btn-outline-secondary">
                     {{ num }}
                     </a>
                     {% endif %}
                     {% endfor %}
 
-                    {% if account.has_next %}
-                    <a href="?page={{ account.next_page_number }}" class="btn btn-outline-secondary rounded-end">
+                    {% if document.has_next %}
+                    <a href="?page={{ document.next_page_number }}" class="btn btn-outline-secondary rounded-end">
                         Next&nbsp;
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-arrow-right-short" viewBox="0 0 16 16">
@@ -159,32 +144,51 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete an account</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete a document</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete this account?
+                Are you sure you want to delete this document?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <a href="" id="removeAcc" type="button" class="btn btn-danger">Yes, delete</a>
+                <a href="" id="removeDoc" type="button" class="btn btn-danger">Confirm</a>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Forward/send modal -->
+<!-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Select recipient: {{ form }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <a href="" id="removeDoc" type="button" class="btn btn-danger">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- End Modal -->
+
 <script>
     function setID(id) {
-        document.getElementById("removeAcc").href = '/account/delete/' + id;
+        document.getElementById("removeDoc").href = '/delete_document/' + id;
     }
 </script>
-
 <!-- search form javascript -->
 <script>
     // Get references to the DOM elements
     const searchInput = document.getElementById("search-input");
     const searchButton = document.getElementById("search-button");
-    const table = document.getElementById("accountTable");
+    const table = document.getElementById("docuTable");
     const noDataFoundMsg = document.getElementById("no-data-found-msg");
     const searchForm = document.getElementById("search-form");
     searchForm.addEventListener("submit", (event) => {
@@ -226,5 +230,4 @@
     searchButton.addEventListener("click", myFunction);
 </script>
 <!-- end script -->
-
 {% endblock %}

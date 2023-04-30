@@ -25,12 +25,14 @@ urlpatterns = [
     # application. The `path` function is used to define the URL pattern, followed by the name of the
     # view function that will handle the request, and a unique name for the URL pattern. The different
     # URL patterns include:
-    path('document', document, name="document"),
+    path('document/outgoing', document, name="document"),
+    path('document/incoming', incoming_document, name="incoming_document"),
     path('document/add', add_docu, name="add_new_document"),
     path('document/view/<str:pk>', view_docu, name="view_document"),
     path('document/update/<str:pk>', update_docu, name="update_document"),
     path('document/delete/<str:pk>', delete_docu, name="delete_document"),
     path('document/forward/<str:pk>', send_docu, name="forward_document"),
+    path('document/receive/<str:pk>', receive_docu, name="receive_docu"),
 
     # `path('activity/history', history, name="activity_history")` is defining a URL pattern for the
     # `history` view function, which will handle requests to the `/activity/history` URL. The `name`

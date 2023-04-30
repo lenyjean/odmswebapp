@@ -36,8 +36,19 @@
                 <li><a class="dropdown-item" href="{% url 'department' %}"><i class="bi bi-briefcase-fill"></i>&nbsp;View Departments</a></li>
               </ul>
             </li>
-            <li>
-              <a href="{% url 'document' %}" class="nav-link px-2 text-white" style="{{ document_state }}">Documents</a>
+            <li class="dropdown">
+              <a href="#" class="nav-link px-2 text-white" data-bs-toggle="dropdown" >
+                Documents
+              </a>
+              <ul class="dropdown-menu ">
+                <li>
+                  <a class="dropdown-item " href="{% url 'document' %}">
+                  <i class="bi bi-intersect"></i>&nbsp;Outgoing Documents
+                  
+                  </a>
+                </li>
+                <li><a class="dropdown-item" href="{% url 'department' %}"><i class="bi bi-briefcase-fill"></i>&nbsp;Incoming Documents</a></li>
+              </ul>
             </li>
             <li>
               <a href="{% url 'activity_history' %}" class="nav-link px-2 text-white" style="{{ history_state }}">Activity History</a>

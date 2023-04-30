@@ -135,3 +135,13 @@ class ActivityHistory(models.Model):
 
     def __str__(self):
         return self.history
+
+
+class Notifications(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
+    message = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.message

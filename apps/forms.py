@@ -1,6 +1,6 @@
 from django import forms
 from .models import *
-
+from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
 # This is a Django form class for the Category model that includes all fields.
@@ -50,13 +50,12 @@ user_type = (
     ('admin', 'admin'),
     ('employee', 'employee'),
 )
-class UserForm(forms.ModelForm):
+class UserForm(UserCreationForm):
     user_type = forms.ChoiceField(label="This account is for : ", choices=user_type)
-    password = forms.CharField(widget=forms.PasswordInput)
     contact = forms.CharField(label="Contact Number ")
     class Meta:
         model = User
-        fields = ['profile_picture', 'user_type', 'employee_no', 'first_name', 'last_name',  'address', 'contact', 'password'] 
+        fields = ['profile_picture', 'user_type', 'employee_no', 'first_name', 'last_name',  'address', 'contact', 'department'] 
 
 
 # This is a Django form for updating user information including profile picture, name, sex, birthday,

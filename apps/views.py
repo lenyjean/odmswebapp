@@ -117,7 +117,6 @@ def add_account(request):
             user_account.is_admin = True
         elif user_type == "employee":
             user_account.is_employee = True
-        user_account.set_password(request.POST.get("password1"))
         user_account.save()
         print("User account saved:", user_account)
         
@@ -381,6 +380,29 @@ def document(request):
     return render(request, template_name, context)
 
 @login_required(login_url='/login')
+def incoming_document(request):
+    """
+    The function "document" is not defined and therefore cannot be summarized.
+    
+    :param request: The `request` parameter in a Django view function represents an HTTP request that is
+    sent by a client to the server. It contains information about the request, such as the URL, headers,
+    and any data that was sent in the request body. The view function processes the request and returns
+    an HTTP response
+    """
+    template_name = 'document/incoming_docu_list.html'
+
+    document = Documents.objects.filter(receiver= request.user.department).order_by('-uploaded_at')
+    # form = ForwardDocumentForm(request.POST or None, instance=forward) 
+    paginator = Paginator(document, 10)
+    page_number = request.GET.get('page')
+    document = paginator.get_page(page_number)
+    context = {
+        "document": document,
+        "document_state": "background-color: rgba(212, 210, 210, 1);  color: #fff;",
+    }
+    return render(request, template_name, context)
+
+@login_required(login_url='/login')
 def send_docu(request, pk):
     """
     The function "send_docu" takes in a request and a primary key as parameters.
@@ -398,11 +420,34 @@ def send_docu(request, pk):
     form = ForwardDocumentForm(request.POST or None, instance=forward)
     if form.is_valid():
         form.save()
+        user = get_object_or_404(User, department=form.cleaned_data['receiver'])
+        Notifications.objects.create(user = user,
+                                     message = f"{request.user.first_name} {request.user.last_name} sent you a file",)
         return redirect('document')
     context = {
         "form": form,
     }
     return render(request, template_name, context)
+
+@login_required(login_url='/login')
+def receive_docu(request, pk):
+    """
+    The function "send_docu" takes in a request and a primary key as parameters.
+    
+    :param request: The request parameter is an object that represents the HTTP request made by the
+    client to the server. It contains information such as the HTTP method used (GET, POST, etc.), the
+    headers, the body of the request, and any query parameters. It is typically passed as the first
+    parameter to a view
+    :param pk: "pk" stands for "primary key". In Django, it is a unique identifier for a specific
+    instance of a model. In this case, it is likely that the "send_docu" function is expecting a request
+    object and a primary key value as parameters. The primary key value is used to
+    """
+    template_name = 'document/forward_doc.html'
+    Documents.objects.filter(id=pk).update(is_received=True)
+    user = get_object_or_404(Documents, id=pk)
+    Notifications.objects.create(user = user.uploaded_by,
+                                    message = f"{request.user.first_name} {request.user.last_name} received your file",)
+    return redirect("/document/incoming")
 
 @login_required(login_url='/login')
 def add_docu(request):
@@ -519,7 +564,7 @@ def history(request):
     HTTP response, which is
     """
     template_name = 'history/history_list.html'
-    history = ActivityHistory.objects.all().order_by('-created_at')
+    history = Notifications.objects.filter(user=request.user).order_by('-created_at')
     paginator = Paginator(history, 10)
     page_number = request.GET.get('page')
     history = paginator.get_page(page_number)

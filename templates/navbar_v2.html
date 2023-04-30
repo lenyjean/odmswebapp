@@ -37,15 +37,28 @@
               <li><a class="dropdown-item" href="{% url 'department' %}"><i class="bi bi-briefcase-fill"></i>&nbsp;View Departments</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link px-2 text-white" href="{% url 'document' %}" style="{{ document_state }}">Document</a>
+          <li class="dropdown">
+            <a class="nav-link dropdown-toggle px-2 text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Documents
+            </a>
+            <ul class="dropdown-menu ">
+              <li>
+                <a class="dropdown-item " href="{% url 'document' %}">
+                  <i class="bi bi-cloud-arrow-up"></i>&nbsp;Outgoing Documents
+                
+                </a>
+              </li>
+              <li><a class="dropdown-item" href="{% url 'incoming_document' %}"><i class="bi bi-cloud-arrow-down"></i>&nbsp;Incoming Documents</a></li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link px-2 text-white" href="{% url 'activity_history' %}" style="{{ history_state }}" >Activity History</a>
+            <a class="nav-link px-2 text-white" href="{% url 'activity_history' %}" style="{{ history_state }}" >Notifications</a>
           </li>
+          {% if user.is_admin %}
           <li class="nav-item">
             <a class="nav-link px-2 text-white" href="{% url 'account' %}" style="{{ account_state }}">User Accounts</a>
           </li>
+          {% endif %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="{{ user.profile_picture.url }}" alt="profile picture" width="30" height="30" class="rounded-circle">

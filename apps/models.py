@@ -103,7 +103,7 @@ class Department(models.Model):
 # document file, upload and receiver information.
 class Documents(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    tracking_no = models.CharField(max_length=255, default=f"DOC-{gen_uuid}", editable=False)
+    tracking_no = models.CharField(max_length=255, default=f"{gen_uuid}", editable=False)
     file_name = models.CharField(max_length=255)
     document = models.FileField(upload_to="documents")
     uploaded_at = models.DateTimeField(auto_now_add=True)

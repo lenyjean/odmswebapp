@@ -452,7 +452,7 @@ def receive_docu(request, pk):
     template_name = 'document/forward_doc.html'
     Documents.objects.filter(id=pk).update(is_received=True)
     user = get_object_or_404(Documents, id=pk)
-    get_sender = Notifications.objects.filter(user=request.user).first()
+    get_sender = Notifications.objects.get(user=request.user)
     Notifications.objects.create(user = get_sender.created_by, link=f"/document/view/{pk}",
                                     message = f"{request.user.first_name} {request.user.last_name} received your file",)
     return redirect("/document/incoming")

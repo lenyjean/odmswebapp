@@ -64,10 +64,10 @@ class UserForm(UserCreationForm):
         model = User
         fields = ['profile_picture', 'user_type', 'employee_no', 'department', 'first_name', 'last_name', 'sex', 'address', 'contact',  'password1', 'password2'] 
 
-    def __init__(self, is_admin, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if not is_admin:
-            del self.fields['user_type']
+    # def __init__(self, is_admin, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     if not is_admin:
+    #         del self.fields['user_type']
 
 # This is a Django form for updating user information including profile picture, name, sex, 
 # address, and contact.

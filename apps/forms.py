@@ -48,7 +48,7 @@ class ForwardDocumentForm(forms.ModelForm):
 # number, first and last name, address, contact number, and password.
 user_type = (
     ('Admin', 'Admin'),
-    ('EMployee', 'Employee'),
+    ('Employee', 'Employee'),
 )
 sex_choices = (
     ('Female', 'Female'),

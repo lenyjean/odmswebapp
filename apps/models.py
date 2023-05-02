@@ -1,10 +1,18 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
+from django.core.validators import RegexValidator
+
 import uuid
 
 def_uuid = uuid.uuid4()
 gen_uuid = str(def_uuid)[:6]
+
+phone_regex = RegexValidator(
+        regex=r'^\+63\d{10}$',
+        message="Phone number must be in the format '+639XXXXXXXXX'"
+    )
+
 
 # Create your models here.
 # This is a custom user model manager in Python where email is used as the unique identifier for
@@ -56,7 +64,7 @@ class User(AbstractUser):
     middle_name = models.CharField(max_length=255, blank=True)
     address = models.CharField(max_length=255)
     birthday = models.DateField(auto_now_add=False, null=True, blank=True)
-    contact = models.CharField(max_length=255)
+    contact = models.CharField(validators=[phone_regex], max_length=13)
     sex = models.CharField(max_length=255)
     is_employee = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)

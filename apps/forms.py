@@ -58,7 +58,7 @@ sex_choices = (
 class UserForm(UserCreationForm):
     user_type = forms.ChoiceField(label="This account is for : ", choices=user_type)
     sex = forms.ChoiceField(choices=sex_choices)
-    contact = forms.CharField(label="Contact Number")
+    contact = forms.CharField(label="Contact Number (+63XXXXXXXXXX) format")
     address = forms.CharField(label="Address: Municipality/City, Province")
     class Meta:
         model = User
@@ -73,6 +73,7 @@ class UserForm(UserCreationForm):
 # address, and contact.
 class UserUpdateForm(forms.ModelForm):
     employee_no = forms.CharField(disabled=True)
+    contact = forms.CharField(label="Contact Number (+63XXXXXXXXXX) format")
 
     class Meta:
         model = User

@@ -123,6 +123,7 @@ def add_account(request):
                 user_account.is_employee = True
             user_account.save()
             print("User account saved:", user_account)
+            return redirect('account')
         else:
             messages.error(request, f"Error adding new user. Account already exists in {department_name.department}")
             return redirect('/account/add')

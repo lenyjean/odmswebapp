@@ -53,16 +53,16 @@
               <li><a class="dropdown-item" href="{% url 'incoming_document' %}"><i class="bi bi-cloud-arrow-down"></i>&nbsp;Incoming Documents</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link px-2 text-white" href="{% url 'activity_history' %}" style="{{ history_state }}" >
-              <i class="bi bi-bell-fill"></i><span class="badge text-bg-danger"  hx-get="/notification/count" hx-trigger="every 1s"></span>
-            </a>
-          </li>
           {% if user.is_admin %}
           <li class="nav-item">
             <a class="nav-link px-2 text-white" href="{% url 'account' %}" style="{{ account_state }}">User Accounts</a>
-          </li>
+          </li>&nbsp;&nbsp;&nbsp;&nbsp;
           {% endif %}
+          <li class="nav-item">
+            <a class="nav-link px-2 text-white" href="{% url 'activity_history' %}" style="{{ history_state }}" >
+              <i class="bi bi-bell-fill"></i>&nbsp;<span class="badge text-bg-danger"  hx-get="/notification/count" hx-trigger="every 1s"></span>
+            </a>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="{{ user.profile_picture.url }}" alt="profile picture" width="30" height="30" class="rounded-circle">

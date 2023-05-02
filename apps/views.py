@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -373,7 +374,7 @@ def document(request):
     an HTTP response
     """
     template_name = 'document/docu_list.html'
-    document = Documents.objects.all().order_by('-uploaded_at')
+    document = Documents.objects.filter(uploaded_by=request.user).order_by('-uploaded_at')
     # form = ForwardDocumentForm(request.POST or None, instance=forward) 
     paginator = Paginator(document, 10)
     page_number = request.GET.get('page')
@@ -426,7 +427,7 @@ def send_docu(request, pk):
     if form.is_valid():
         form.save()
         user = get_object_or_404(User, department=form.cleaned_data['receiver'])
-        Notifications.objects.create(user = user,
+        Notifications.objects.create(user = user, link=f"/document/view/{pk}", created_by=request.user,
                                      message = f"{request.user.first_name} {request.user.last_name} sent you a file",)
         return redirect('document')
     context = {
@@ -450,7 +451,8 @@ def receive_docu(request, pk):
     template_name = 'document/forward_doc.html'
     Documents.objects.filter(id=pk).update(is_received=True)
     user = get_object_or_404(Documents, id=pk)
-    Notifications.objects.create(user = user.uploaded_by,
+    get_sender = Notifications.objects.filter(user=request.user).first()
+    Notifications.objects.create(user = get_sender.created_by, link=f"/document/view/{pk}",
                                     message = f"{request.user.first_name} {request.user.last_name} received your file",)
     return redirect("/document/incoming")
 
@@ -494,6 +496,7 @@ def view_docu(request, pk):
     """
     template_name = 'document/view_docu.html'
     document = Documents.objects.filter(id=pk)
+    Notifications.objects.filter(link=f"/document/view/{pk}").update(is_read=True)
     context = {
         "document": document
     }
@@ -627,3 +630,10 @@ def password_update(request):
         "pk": request.user.id
     }
     return render(request, template_name, context)
+
+
+
+def notification_count(request):
+    count = Notifications.objects.filter(is_read=False, user=request.user).count()
+
+    return JsonResponse(count, safe=False)

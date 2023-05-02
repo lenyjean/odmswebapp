@@ -61,4 +61,9 @@ urlpatterns = [
     path("department/add", add_department, name="add_department"),
     path("department/update/<str:pk>", update_department, name="update_department"),
     path("department/delete/<str:pk>", delete_department, name="delete_department"),
+
+
+    path("notification/count", notification_count, name="notification_count"),
+
+    
 ]

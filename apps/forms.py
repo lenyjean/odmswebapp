@@ -76,7 +76,7 @@ class UserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['profile_picture', 'employee_no', 'first_name', 'last_name', 'sex', 'address', 'contact'] 
+        fields = ['profile_picture', 'employee_no',  'department', 'first_name', 'last_name', 'sex', 'address', 'contact'] 
         exclude = ('user_type',)
 
 

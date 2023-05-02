@@ -117,10 +117,12 @@ def add_account(request):
             user_account = form.save(commit=False)
             user_type = request.POST['user_type']
             print(request.POST['user_type'])
-            if user_type == "admin":
+            if user_type == "Admin":
                 user_account.is_admin = True
-            elif user_type == "employee":
+            elif user_type == "Employee":
                 user_account.is_employee = True
+            password = form.cleaned_data.get('password1')
+            user_account.set_password(password)
             user_account.save()
             print("User account saved:", user_account)
             return redirect('account')

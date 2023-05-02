@@ -34,9 +34,10 @@
                         <th scope="col" class="text-center">Full Name</th>
                         <th scope="col" class="text-center">Employee No.</th>
                         <th scope="col" class="text-center">Address</th>
-                        <th scope="col" class="text-center">Birthday</th>
+                        <!-- <th scope="col" class="text-center">Birthday</th> -->
                         <th scope="col" class="text-center">Sex</th>
                         <th scope="col" class="text-center">Contact Number</th>
+                        <th scope="col" class="text-center">Department</th>
                         <th scope="col" class="text-center">User Type</th>
                         <th scope="col" class="text-center">Actions</th>
                     </tr>
@@ -46,9 +47,10 @@
                     <td class="text-center">{{ list.first_name }} {{ list.middle_name }} {{ list.last_name }}</td>
                     <td class="text-center">{{ list.employee_no }}</td>
                     <td class="text-center">{{ list.address }}</td>
-                    <td class="text-center">{{ list.birthday }}</td>
+                    <!-- <td class="text-center">{{ list.birthday }}</td> -->
                     <td class="text-center">{{ list.sex }}</td>
                     <td class="text-center">{{ list.contact}}</td>
+                    <td class="text-center">{{ list.department}}</td>
                     <td class="text-center">
                         {% if list.is_admin %}
                         <span class="badge bg-primary">Admin</span>

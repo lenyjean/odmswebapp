@@ -47,26 +47,38 @@ class ForwardDocumentForm(forms.ModelForm):
 # The class defines a form for creating a user with fields for profile picture, user type, employee
 # number, first and last name, address, contact number, and password.
 user_type = (
-    ('admin', 'admin'),
-    ('employee', 'employee'),
+    ('Admin', 'Admin'),
+    ('EMployee', 'Employee'),
+)
+sex_choices = (
+    ('Female', 'Female'),
+    ('Male', 'Male'),
+    ('Others', 'Others'),
 )
 class UserForm(UserCreationForm):
     user_type = forms.ChoiceField(label="This account is for : ", choices=user_type)
-    contact = forms.CharField(label="Contact Number ")
+    sex = forms.ChoiceField(choices=sex_choices)
+    contact = forms.CharField(label="Contact Number")
+    address = forms.CharField(label="Address: Municipality/City, Province")
     class Meta:
         model = User
-        fields = ['profile_picture', 'user_type', 'employee_no', 'first_name', 'last_name',  'address', 'contact', 'department'] 
+        fields = ['profile_picture', 'user_type', 'employee_no', 'department', 'first_name', 'last_name', 'sex', 'address', 'contact',  'password1', 'password2'] 
 
+    def __init__(self, is_admin, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not is_admin:
+            del self.fields['user_type']
 
-# This is a Django form for updating user information including profile picture, name, sex, birthday,
+# This is a Django form for updating user information including profile picture, name, sex, 
 # address, and contact.
 class UserUpdateForm(forms.ModelForm):
-    user_type = forms.ChoiceField(choices=user_type)
     employee_no = forms.CharField(disabled=True)
 
     class Meta:
         model = User
-        fields = ['profile_picture', 'employee_no', 'first_name', 'last_name', 'sex', 'birthday', 'address', 'contact'] 
+        fields = ['profile_picture', 'employee_no', 'first_name', 'last_name', 'sex', 'address', 'contact'] 
+        exclude = ('user_type',)
+
 
 # This is a login form class in Python that includes fields for employee number and password.
 class LoginForm(forms.Form):

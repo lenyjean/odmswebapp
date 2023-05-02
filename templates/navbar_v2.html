@@ -25,6 +25,7 @@
           <li class="nav-item ">
             <a class="nav-link px-2 text-primary" aria-current="page" href="{% url 'home' %}" style="{{ home_state }}">Home</a>
           </li>
+          {% if user.is_admin %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle px-2 text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
              Category / Departments
@@ -37,6 +38,7 @@
               <li><a class="dropdown-item" href="{% url 'department' %}"><i class="bi bi-briefcase-fill"></i>&nbsp;View Departments</a></li>
             </ul>
           </li>
+          {% endif %}
           <li class="dropdown">
             <a class="nav-link dropdown-toggle px-2 text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Documents

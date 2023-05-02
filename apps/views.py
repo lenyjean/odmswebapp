@@ -109,17 +109,22 @@ def add_account(request):
     """
     template_name = 'accounts/add_account.html'
     form = UserForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        user_account = form.save(commit=False)
-        user_type = request.POST['user_type']
-        print(request.POST['user_type'])
-        if user_type == "admin":
-            user_account.is_admin = True
-        elif user_type == "employee":
-            user_account.is_employee = True
-        user_account.save()
-        print("User account saved:", user_account)
-        
+    department = request.POST.get("department")
+    department_name = Department.objects.filter(id=department).first()
+    if request.method == 'POST':
+        if form.is_valid():
+            user_account = form.save(commit=False)
+            user_type = request.POST['user_type']
+            print(request.POST['user_type'])
+            if user_type == "admin":
+                user_account.is_admin = True
+            elif user_type == "employee":
+                user_account.is_employee = True
+            user_account.save()
+            print("User account saved:", user_account)
+        else:
+            messages.error(request, f"Error adding new user. Account already exists in {department_name.department}")
+            return redirect('/account/add')
     context = {
         "form": form
     }
@@ -543,13 +548,13 @@ def delete_docu(request, pk):
     record in a database table. In this case, the "delete_docu" function is likely deleting a document
     from a database table and the "pk" parameter is used to identify which document to
     """
-    file = Documents.objects.get(id=pk)
+    document = Documents.objects.get(id=pk)
     delete_history(
         user=f"{request.user.first_name}, {request.user.last_name}",
-        history=f"The document titled {file.file_name} was deleted by {request.user.first_name}, {request.user.last_name} ",
+        history=f"The document titled {document.file_name} was deleted by {request.user.first_name}, {request.user.last_name} ",
         user_image = f"{request.user.profile_picture.url}"
     )
-    file.delete()
+    document.delete()
     return redirect('document')
 
 @login_required(login_url='/login')

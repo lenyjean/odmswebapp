@@ -118,7 +118,7 @@ class Documents(models.Model):
     uploaded_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="file_uploader")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="file_category")
     is_received = models.BooleanField(default=False)
-    receiver = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, related_name="file_receiver")
+    receiver = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, related_name="file_receiver", verbose_name="Receiving Office:")
 
     class Meta:
         verbose_name = 'Document'

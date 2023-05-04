@@ -31,11 +31,15 @@
              Category / Departments
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'category' %}"><i class="bi bi-intersect"></i>&nbsp;View Category</a></li>
+              <li><a class="dropdown-item" href="{% url 'category' %}"><i class="bi bi-intersect"></i>&nbsp;&nbsp;Document Type</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="{% url 'department' %}"><i class="bi bi-briefcase-fill"></i>&nbsp;View Departments</a></li>
+              <li><a class="dropdown-item" href="{% url 'department' %}"><i class="bi bi-briefcase-fill"></i>&nbsp;&nbsp;Department/Office</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="{% url 'history_logs' %}"><i class="bi bi-clock-history"></i>&nbsp;&nbsp;Document Status</a></li>
             </ul>
           </li>
           {% endif %}
@@ -46,11 +50,11 @@
             <ul class="dropdown-menu ">
               <li>
                 <a class="dropdown-item " href="{% url 'document' %}">
-                  <i class="bi bi-cloud-arrow-up"></i>&nbsp;Outgoing Documents
+                  <i class="bi bi-cloud-arrow-up"></i>&nbsp;&nbsp;Outgoing Documents
                 
                 </a>
               </li>
-              <li><a class="dropdown-item" href="{% url 'incoming_document' %}"><i class="bi bi-cloud-arrow-down"></i>&nbsp;Incoming Documents</a></li>
+              <li><a class="dropdown-item" href="{% url 'incoming_document' %}"><i class="bi bi-cloud-arrow-down"></i>&nbsp;&nbsp;Incoming Documents</a></li>
             </ul>
           </li>
           {% if user.is_admin %}

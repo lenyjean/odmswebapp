@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 
 # This is a Django form class for the Category model that includes all fields.
 class CategoryForm(forms.ModelForm):
+    category =  forms.CharField(label="Document Type")
     class Meta:
         model = Category
         fields = '__all__'
@@ -17,17 +18,16 @@ class DepartmentForm(forms.ModelForm):
         model = Department
         fields = '__all__'
 
-
 class DocumentForm(forms.ModelForm):
     document = forms.FileField(
         label='Select a PDF file',
         required=True,
         widget=forms.ClearableFileInput(attrs={'accept': 'application/pdf'})
     )
-
+    
     class Meta:
         model = Documents
-        fields = ['file_name', 'category', 'document']
+        fields = ['file_name', 'category', 'document', 'receiver']
 
     def clean_document(self):
         document = self.cleaned_data['document']
@@ -58,11 +58,11 @@ sex_choices = (
 class UserForm(UserCreationForm):
     user_type = forms.ChoiceField(label="This account is for : ", choices=user_type)
     sex = forms.ChoiceField(choices=sex_choices)
-    contact = forms.CharField(label="Contact Number (+63XXXXXXXXXX) format")
+    # contact = forms.CharField(label="Contact Number (+63XXXXXXXXXX) format")
     address = forms.CharField(label="Address: Municipality/City, Province")
     class Meta:
         model = User
-        fields = ['profile_picture', 'user_type', 'employee_no', 'department', 'first_name', 'last_name', 'sex', 'address', 'contact',  'password1', 'password2'] 
+        fields = ['profile_picture', 'employee_no', 'user_type', 'department', 'first_name', 'last_name', 'sex', 'address', 'contact',  'password1', 'password2'] 
 
     # def __init__(self, is_admin, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
@@ -73,11 +73,11 @@ class UserForm(UserCreationForm):
 # address, and contact.
 class UserUpdateForm(forms.ModelForm):
     employee_no = forms.CharField(disabled=True)
-    contact = forms.CharField(label="Contact Number (+63XXXXXXXXXX) format")
+    # contact = forms.CharField(label="Contact Number (+63XXXXXXXXXX) format")
 
     class Meta:
         model = User
-        fields = ['profile_picture', 'employee_no',  'department', 'first_name', 'last_name', 'sex', 'address', 'contact'] 
+        fields = ['profile_picture', 'employee_no', 'first_name', 'last_name', 'sex', 'address', 'contact'] 
         exclude = ('user_type',)
 
 

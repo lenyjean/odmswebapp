@@ -480,6 +480,9 @@ def add_docu(request):
             history = f"A new document titled {obj.file_name} was uploaded by {request.user.first_name}, {request.user.last_name}",
             user_image = f"{request.user.profile_picture.url}"    
         )
+        user = get_object_or_404(User, department=form.cleaned_data['receiver'])
+        Notifications.objects.create(user = user, link=f"/document/view/{obj.id}", created_by=request.user,
+                                     message = f"{request.user.first_name} {request.user.last_name} sent you a file",)
         return redirect('document')
     context = {
         "form": form,
@@ -575,7 +578,7 @@ def history(request):
     and any data that was sent with the request. The view function processes the request and returns an
     HTTP response, which is
     """
-    template_name = 'history/history_list.html'
+    template_name = 'notification/notification_list.html'
     history = Notifications.objects.filter(user=request.user).order_by('-created_at')
     paginator = Paginator(history, 10)
     page_number = request.GET.get('page')
@@ -583,6 +586,28 @@ def history(request):
     context = {
         "history": history,
         "history_state": "background-color: rgba(212, 210, 210, 1);  color: #fff;",
+    }
+    return render(request, template_name, context)
+
+@login_required(login_url='/login')
+def history_logs(request):
+    """
+    The function "history" is defined in Python, but there is no code provided to determine its purpose
+    or functionality.
+    
+    :param request: The request parameter in a Django view function represents an HTTP request that is
+    sent by a client to the server. It contains information about the request, such as the URL, headers,
+    and any data that was sent with the request. The view function processes the request and returns an
+    HTTP response, which is
+    """
+    template_name = 'history_logs/history_list.html'
+    logs = ActivityHistory.objects.all().order_by('-created_at')
+    paginator = Paginator(logs, 10)
+    page_number = request.GET.get('page')
+    logs = paginator.get_page(page_number)
+    context = {
+        "logs": logs,
+        "log_state": "background-color: rgba(212, 210, 210, 1);  color: #fff;",
     }
     return render(request, template_name, context)
 

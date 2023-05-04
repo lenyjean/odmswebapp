@@ -39,6 +39,7 @@ urlpatterns = [
     # parameter is used to give a unique name to the URL pattern, which can be used to refer to it in
     # other parts of the Django application.
     path('activity/history', history, name="activity_history"),
+    path('activity/history-logs', history_logs, name="history_logs"),
 
    # `path('profile', view_profile, name="profile")` is defining a URL pattern for the `view_profile`
    # view function, which will handle requests to the `/profile` URL. The `name` parameter is used to

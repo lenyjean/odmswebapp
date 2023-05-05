@@ -74,12 +74,14 @@ class UserForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     employee_no = forms.CharField(disabled=True)
     # contact = forms.CharField(label="Contact Number (+63XXXXXXXXXX) format")
-
     class Meta:
         model = User
-        fields = ['profile_picture', 'employee_no', 'first_name', 'last_name', 'sex', 'address', 'contact'] 
+        fields = ['profile_picture', 'employee_no', 'department', 'first_name', 'last_name', 'sex', 'address', 'contact'] 
         exclude = ('user_type',)
-
+    
+    def __init__(self, *args, **kwargs):
+        super(UserUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['department'].widget.attrs['disabled'] = True
 
 # This is a login form class in Python that includes fields for employee number and password.
 class LoginForm(forms.Form):

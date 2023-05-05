@@ -6,7 +6,7 @@ from django.core.validators import RegexValidator
 import uuid
 
 def_uuid = uuid.uuid4()
-gen_uuid = str(def_uuid)[:6]
+gen_uuid = str(uuid.uuid4())[:6]
 
 phone_regex = RegexValidator(
         regex=r'^\+63\d{10}$',
@@ -64,7 +64,7 @@ class User(AbstractUser):
     middle_name = models.CharField(max_length=255, blank=True)
     address = models.CharField(max_length=255)
     birthday = models.DateField(auto_now_add=False, null=True, blank=True)
-    contact = models.CharField(validators=[phone_regex], max_length=13)
+    contact = models.CharField(max_length=13)
     sex = models.CharField(max_length=255)
     is_employee = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
@@ -111,7 +111,7 @@ class Department(models.Model):
 # document file, upload and receiver information.
 class Documents(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    tracking_no = models.CharField(max_length=255, default=f"{gen_uuid}", editable=False)
+    tracking_no = models.CharField(max_length=255, default=str(uuid.uuid4())[:6], editable=False)
     file_name = models.CharField(max_length=255)
     document = models.FileField(upload_to="documents")
     uploaded_at = models.DateTimeField(auto_now_add=True)

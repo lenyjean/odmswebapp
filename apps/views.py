@@ -127,7 +127,7 @@ def add_account(request):
             print("User account saved:", user_account)
             return redirect('account')
         else:
-            messages.error(request, f"Error adding new user. Account already exists in {department_name.department}")
+            messages.error(request, f"Error adding new user. {form.errors}")
             return redirect('/account/add')
     context = {
         "form": form
@@ -601,7 +601,7 @@ def history_logs(request):
     HTTP response, which is
     """
     template_name = 'history_logs/history_list.html'
-    logs = ActivityHistory.objects.all().order_by('-created_at')
+    logs = Documents.objects.filter(uploaded_by__department=request.user.department).order_by('-uploaded_at')
     paginator = Paginator(logs, 10)
     page_number = request.GET.get('page')
     logs = paginator.get_page(page_number)
